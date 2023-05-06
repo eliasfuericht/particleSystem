@@ -1,0 +1,25 @@
+#pragma once
+#include <iostream>
+#include <cmath>
+
+class Vector2 {
+public:
+    double x;
+    double y;
+
+    Vector2(double x = 0.0, double y = 0.0) : x(x), y(y) {}
+
+    void normalize() {
+        double length = std::sqrt(x * x + y * y);
+        if (length != 0.0) {
+            x /= length;
+            y /= length;
+        }
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Vector2& v) {
+        os << "(" << v.x << ", " << v.y << ")";
+        return os;
+    }
+};
+

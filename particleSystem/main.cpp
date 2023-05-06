@@ -1,62 +1,37 @@
-#include <iostream>
-#include <SDL.h>
-#include <stdio.h>
-#include <vector>
-#include <cstdlib>
 #include "main.h"
-#include "Vector2.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1080;
 
-const int NUM_PARTICLES = 2000;
+const int NUM_PARTICLES = 5000;
 
-SDL_Color drawColor = { 0,150,255,255 };
+Color drawColor = { 0,150,255,255 };
 
-struct Vector2
-{
-	double x;
-	double y;
-
-	void normalize() {
-		float length = std::sqrt(x * x + y * y);
-		if (length != 0.0f) {
-			x /= length;
-			y /= length;
-		}
-	}
-
-	friend std::ostream& operator<<(std::ostream& os, const Vector2& v) {
-		os << "(" << v.x << ", " << v.y << ")";
-		return os;
-	}
-};
-
-std::vector<SDL_Point> createPoints(int n) {
-	std::vector<SDL_Point> points;
+std::vector<Particle> createPoints(int n) {
+	std::vector<Particle> particles;
 	for (int i = 0; i < n; i++) {
-		SDL_Point p = { rand() % 640,rand() % 480 };
-		points.push_back(p);
+		Particle particle{ Vector2(rand() % SCREEN_WIDTH, rand() % SCREEN_HEIGHT), Vector2(), Vector2(), Vector2(), Color(255,0,0,255)};
+		particles.push_back(particle);
 	}
-	return points;
+	return particles;
 }
 
-void updatePoints(double dt, std::vector<SDL_Point>& points) {
+void updatePoints(double dt, std::vector<Particle>& particles) {
 	//get targetdirection by vectorsubtraction of next point
-	for (size_t i = 0; i < points.size() - 1; i++) {
-		Vector2 dir = { 640/2 - points[i].x, 480/2 - points[i].y };
+	for (size_t i = 0; i < particles.size() - 1; i++) {
+		Vector2 dir = { SCREEN_WIDTH / 2.0 - particles[i].position.x, SCREEN_HEIGHT / 2.0 - particles[i].position.y };
 		dir.normalize();
-		points[i].x += dir.x * dt;
-		points[i].y += dir.y * dt;
+		particles[i].position.x += dir.x * dt;
+		particles[i].position.y += dir.y * dt;
 	}
 }
 
-void drawPoints(SDL_Renderer* r, SDL_Color c, std::vector<SDL_Point>& points) {
+void drawPoints(SDL_Renderer* r,std::vector<Particle>& particles) {
 	SDL_SetRenderDrawColor(r, 0, 0, 0, 0);
 	SDL_RenderClear(r);
-	SDL_SetRenderDrawColor(r, c.r, c.g, c.b, c.a);
-	for (SDL_Point p : points) {
-		SDL_RenderDrawPoint(r, p.x, p.y);
+	for (Particle const p : particles) {
+		SDL_SetRenderDrawColor(r, p.color.r, p.color.g, p.color.b, p.color.a);
+		SDL_RenderDrawPoint(r, p.position.x, p.position.y);
 	}
 	SDL_RenderPresent(r);
 }
@@ -67,7 +42,9 @@ int main(int argc, char* args[]) {
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-	std::vector<SDL_Point> points = createPoints(NUM_PARTICLES);
+	ParticleSystem particleSystem = ParticleSystem(window, renderer,SCREEN_WIDTH,SCREEN_HEIGHT, NUM_PARTICLES);
+	
+	particleSystem.createPoints(NUM_PARTICLES);
 
 	SDL_Event e;
 
@@ -86,9 +63,9 @@ int main(int argc, char* args[]) {
 		//Game Loop
 		Uint32 elapsedTime = SDL_GetTicks() - startTime;
 
-		updatePoints(elapsedTime, points);
+		particleSystem.update(elapsedTime, particleSystem.particles);
 
-		drawPoints(renderer, drawColor, points);
+		particleSystem.drawPoints(renderer, particleSystem.particles);
 
 		frameCount++;
 
