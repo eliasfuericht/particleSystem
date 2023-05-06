@@ -1,2 +1,7 @@
 ﻿  main.cpp
+C:\dev\projects\particleSystem\particleSystem\main.cpp(22,16): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\dev\projects\particleSystem\particleSystem\main.cpp(47,25): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\dev\projects\particleSystem\particleSystem\main.cpp(47,46): warning C4838: conversion from 'int' to 'double' requires a narrowing conversion
+C:\dev\projects\particleSystem\particleSystem\main.cpp(49,24): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\dev\projects\particleSystem\particleSystem\main.cpp(50,24): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   particleSystem.vcxproj -> C:\dev\projects\particleSystem\particleSystem\x64\Debug\particleSystem.exe
