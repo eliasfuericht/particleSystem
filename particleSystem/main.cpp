@@ -3,7 +3,7 @@
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;
 
-const int NUM_PARTICLES = 5000;
+const int NUM_PARTICLES = 5001;
 
 Color drawColor = { 0,150,255,255 };
 
@@ -60,10 +60,11 @@ int main(int argc, char* args[]) {
 			}
 		}
 
+		double dt = SDL_GetTicks();
 		//Game Loop
-		Uint32 elapsedTime = SDL_GetTicks() - startTime;
+		Uint32 elapsedTime = dt - startTime;
 
-		particleSystem.update(elapsedTime, particleSystem.particles);
+		particleSystem.update(dt, particleSystem.particles);
 
 		particleSystem.drawPoints(renderer, particleSystem.particles);
 
@@ -71,7 +72,7 @@ int main(int argc, char* args[]) {
 
 		if (elapsedTime >= 1000) {
 			float fps = static_cast<float>(frameCount) / (elapsedTime / 1000.0f);
-			std::cout << "FPS: " << fps << std::endl;
+			//std::cout << "FPS: " << fps << std::endl;
 			startTime = SDL_GetTicks();
 			frameCount = 0;
 		}
