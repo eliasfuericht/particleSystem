@@ -13,18 +13,26 @@ public:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	int screenWidth;
+	Color color;
+
+	int systemWidth;
 	int screenHeight;
 	int particleCount;
 
+
+	Vector2 Mouse;
+
 	std::vector<Particle> particles;
+
+	ParticleSystem(SDL_Window* w, SDL_Renderer* r, const int& screenWidth, const int& screenHeight, const int& particleCount, const Color& particleColor) : window(w), renderer(r), systemWidth(screenWidth), screenHeight(screenHeight), particleCount(particleCount), color(particleColor) {}
 
 	std::vector<Particle> createPoints(int n);
 
-	void update(double dt, std::vector<Particle>& particles);
+	void update(double dt);
 
-	void drawPoints(SDL_Renderer* r, std::vector<Particle>& particles);
+	void drawPoints();
 
-	ParticleSystem(SDL_Window* w,SDL_Renderer* r, const int& screenWidth, const int& screenHeight, const int& particleCount) : window(w), renderer(r), screenWidth(screenWidth), screenHeight(screenHeight), particleCount(particleCount) {}
+	void setMouse(Vector2& m);
+
 };
 

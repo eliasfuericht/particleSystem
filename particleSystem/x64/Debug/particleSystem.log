@@ -1,5 +1,9 @@
-﻿  main.cpp
-C:\dev\projects\particleSystem\particleSystem\main.cpp(34,50): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
-C:\dev\projects\particleSystem\particleSystem\main.cpp(34,36): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
-C:\dev\projects\particleSystem\particleSystem\main.cpp(65,22): warning C4244: 'initializing': conversion from 'double' to 'Uint32', possible loss of data
+﻿  ParticleSystem.cpp
+C:\dev\projects\particleSystem\particleSystem\Vector2.h(25,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\dev\projects\particleSystem\particleSystem\ParticleSystem.cpp(33,57): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+C:\dev\projects\particleSystem\particleSystem\ParticleSystem.cpp(33,43): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+  main.cpp
+C:\dev\projects\particleSystem\particleSystem\Vector2.h(25,25): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\dev\projects\particleSystem\particleSystem\main.cpp(54,22): warning C4244: 'initializing': conversion from 'double' to 'Uint32', possible loss of data
+  Generating Code...
   particleSystem.vcxproj -> C:\dev\projects\particleSystem\particleSystem\x64\Debug\particleSystem.exe
