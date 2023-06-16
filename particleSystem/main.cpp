@@ -1,4 +1,13 @@
-#include "main.h"
+#pragma once
+
+#include <iostream>
+#include <SDL.h>
+#include <stdio.h>
+#include <vector>
+#include <cstdlib>
+#include <cmath>
+
+#include "ParticleSystem.h"
 
 const int SCREEN_WIDTH = 1920;
 const int SCREEN_HEIGHT = 1080;

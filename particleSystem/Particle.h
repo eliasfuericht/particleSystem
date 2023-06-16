@@ -7,6 +7,19 @@
 class Particle
 {
 public:
+	Particle(Vector2 pos, Vector2 vel, Vector2 acc, Vector2 att, Color csol, int life);
+
+	Color GetColor() { return color; }
+	Vector2 GetPosition() { return position; }
+	Vector2 GetVelocity() { return velocity; }
+	Vector2 GetAcceleration() { return acceleration; }
+	Vector2 GetAttractor() { return attractor; }
+	int GetLifeTime() { return lifeTime; }
+
+	void UpdateXPosition(float dirX);
+	void UpdateYPosition(float dirY);
+
+private:
 	Vector2 position;
 	Vector2 velocity;
 	Vector2 acceleration;
@@ -15,8 +28,5 @@ public:
 	Color color;
 
 	int lifeTime;
-
-	Particle(const Vector2& pos = Vector2(), const Vector2& vel = Vector2(), const Vector2& acc = Vector2(), const Vector2& att = Vector2(), const Color& col = Color(), const int& lifeTime = 0)
-		: position(pos), velocity(vel), acceleration(acc), attractor(att), color(col), lifeTime(lifeTime){}
 };
 
